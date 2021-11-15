@@ -1,6 +1,6 @@
 import Button from '@mui/material/Button';
 import React from 'react';
-import MainNavigation from '../components/MainNavigation';
+import MainNavigation from '../components/Layout/MainNavigation';
 import Card from '../components/UI/Card';
 import Grid from '@mui/material/Grid';
 import classes from './LandingPage.module.css';
@@ -44,7 +44,7 @@ const LandingPage = () => {
                                 alt="stack of books"
                                 height="300px"
                             />
-                            <Button>SIGN UP</Button>
+                            <Button href="/signup">SIGN UP</Button>
                         </Stack>
                     </Card>
                 </Grid>

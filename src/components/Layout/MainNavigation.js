@@ -1,7 +1,7 @@
 import AppBar from '@mui/material/AppBar';
 import ToolBar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import theme from '../theme';
+import theme from '../../theme';
 import { ThemeProvider } from '@mui/material/styles';
 
 const MainNavigation = () => {
