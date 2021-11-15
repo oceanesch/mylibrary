@@ -8,8 +8,25 @@ import {
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Visibility from '@mui/icons-material/Visibility';
+import { useState } from 'react';
+import { VisibilityOff } from '@mui/icons-material';
 
 const SignUpForm = () => {
+    const [passwordInput, setPasswordInput] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+
+    const changeHandler = (event) => {
+        setPasswordInput(event.target.value);
+    };
+
+    const clickShowPasswordHandler = () => {
+        setShowPassword(!showPassword);
+    };
+
+    const mouseDownPasswordHandler = (event) => {
+        event.preventDefault();
+    };
+
     return (
         <Box>
             <TextField
@@ -35,15 +52,24 @@ const SignUpForm = () => {
                 <InputLabel htmlFor="password-input">Password</InputLabel>
                 <OutlinedInput
                     id="password-input"
+                    type={showPassword ? 'text' : 'password'}
+                    value={passwordInput}
+                    onChange={changeHandler}
+                    label="password"
                     required
-                    type="password"
                     endAdornment={
                         <InputAdornment position="end">
                             <IconButton
                                 aria-label="toggle password visibility"
                                 edge="end"
+                                onClick={clickShowPasswordHandler}
+                                onMouseDown={mouseDownPasswordHandler}
                             >
-                                {<Visibility />}
+                                {showPassword ? (
+                                    <VisibilityOff />
+                                ) : (
+                                    <Visibility />
+                                )}
                             </IconButton>
                         </InputAdornment>
                     }
