@@ -1,8 +1,12 @@
+import React from 'react';
+import MainNavigation from '../components/Layout/MainNavigation';
+
 const MyShelf = () => {
     return (
-        <div>
+        <React.Fragment>
+            <MainNavigation />
             <h1>MY SHELF PAGE</h1>
-        </div>
+        </React.Fragment>
     );
 };
 
