@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Visibility from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
 
 const SignUpForm = () => {
     return (
