@@ -1,3 +1,5 @@
+import BookItem from './BookItem';
+
 const DUMMY_BOOKS = [
     {
         id: 'book1',
@@ -60,3 +62,9 @@ const DUMMY_BOOKS = [
         image: 'https://images-na.ssl-images-amazon.com/images/I/91b2W5Xh49L.jpg',
     },
 ];
+
+const BookList = () => {
+    return <BookItem />;
+};
+
+export default BookList;
