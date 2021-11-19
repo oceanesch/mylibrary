@@ -1,0 +1,16 @@
+.logo {
+    width: 75px;
+    height: 75px;
+}
+
+.mainNav {
+    background-color: #ffdcb8;
+    color: #ffc1b6;
+}
+
+.mainNavBtn {
+    background-color: #fdffbc !important;
+    font-family: 'Mate SC' !important;
+    color: #ffc1b6 !important;
+    font-weight: bold !important;
+}

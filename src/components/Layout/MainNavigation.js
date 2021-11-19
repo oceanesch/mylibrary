@@ -1,18 +1,28 @@
 import AppBar from '@mui/material/AppBar';
 import ToolBar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import theme from '../../theme';
-import { ThemeProvider } from '@mui/material/styles';
+import logo from './logo/logo.png';
+import classes from './MainNavigation.module.css';
+import Grid from '@mui/material/Grid';
 
 const MainNavigation = () => {
     return (
-        <ThemeProvider theme={theme}>
-            <AppBar position="static">
-                <ToolBar>
-                    <Button color="inherit">Login</Button>
-                </ToolBar>
-            </AppBar>
-        </ThemeProvider>
+        <AppBar position="static">
+            <ToolBar className={classes.mainNav}>
+                <img
+                    alt="logo of the app"
+                    src={logo}
+                    className={classes.logo}
+                />
+                <Button
+                    className={classes.mainNavBtn}
+                    variant="contained"
+                    disableElevation
+                >
+                    Login
+                </Button>
+            </ToolBar>
+        </AppBar>
     );
 };
 
