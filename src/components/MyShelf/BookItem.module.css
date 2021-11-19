@@ -6,4 +6,13 @@
     align-items: center;
     align-content: center;
     justify-content: center;
+    text-align: center;
+    margin: 40px;
+}
+
+.bookCardTitle {
+    font-family: 'Mate SC' !important;
+}
+
+.bookCardContent {
 }

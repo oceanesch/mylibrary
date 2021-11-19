@@ -1,3 +1,5 @@
+import React from 'react';
+import classes from './BookList.module.css'
 import BookItem from './BookItem';
 
 const DUMMY_BOOKS = [
@@ -64,7 +66,20 @@ const DUMMY_BOOKS = [
 ];
 
 const BookList = () => {
-    return <BookItem />;
+    return (
+        <ul className={classes.bookList}>
+            {DUMMY_BOOKS.map((book) => {
+                return (
+                    <BookItem
+                        key={book.id}
+                        title={book.title}
+                        author={book.author}
+                        image={book.image}
+                    />
+                );
+            })}
+        </ul>
+    );
 };
 
 export default BookList;
