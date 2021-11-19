@@ -3,17 +3,21 @@ import ToolBar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import logo from './logo/logo.png';
 import classes from './MainNavigation.module.css';
-import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import { Link } from 'react-router-dom';
 
 const MainNavigation = () => {
     return (
         <AppBar position="static">
             <ToolBar className={classes.mainNav}>
-                <img
-                    alt="logo of the app"
-                    src={logo}
-                    className={classes.logo}
-                />
+                <Link to="/">
+                    <img
+                        alt="logo of the app"
+                        src={logo}
+                        className={classes.logo}
+                    />
+                </Link>
+                <Typography component="div" sx={{ flexGrow: 1 }} />
                 <Button
                     className={classes.mainNavBtn}
                     variant="contained"
