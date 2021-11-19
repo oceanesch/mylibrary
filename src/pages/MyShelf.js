@@ -1,8 +1,14 @@
+import React from 'react';
+import MainNavigation from '../components/Layout/MainNavigation';
+import BookList from '../components/MyShelf/BooksList';
+
 const MyShelf = () => {
     return (
-        <div>
+        <React.Fragment>
+            <MainNavigation />
             <h1>MY SHELF PAGE</h1>
-        </div>
+            <BookList/>
+        </React.Fragment>
     );
 };
 
