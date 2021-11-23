@@ -5,6 +5,7 @@ import Card from '../components/UI/Card';
 import Grid from '@mui/material/Grid';
 import classes from './LandingPage.module.css';
 import Stack from '@mui/material/Stack';
+import { Link as RouterLink } from 'react-router-dom';
 
 const LandingPage = () => {
     return (
@@ -44,7 +45,9 @@ const LandingPage = () => {
                                 alt="stack of books"
                                 height="300px"
                             />
-                            <Button href="/signup">SIGN UP</Button>
+                            <Button component={RouterLink} to="/signup">
+                                SIGN UP
+                            </Button>
                         </Stack>
                     </Card>
                 </Grid>

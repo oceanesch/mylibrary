@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 import LandingPage from '../src/pages/LandingPage';
-import MyShelf from '../src/pages/MyShelf';
-import AddNewBook from './pages/AddNewBook';
-import SignUp from './pages/SignUp';
-import LogIn from './pages/LogIn'
+import MyShelf from './pages/MyShelfPage';
+import AddNewBook from './pages/AddNewBookPage';
+import SignUp from './pages/SignUpPage';
+import LogIn from './pages/LogInPage'
 
 function App() {
     return (
