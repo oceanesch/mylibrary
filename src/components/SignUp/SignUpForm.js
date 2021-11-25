@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { Button, Box, TextField, Grid } from '@mui/material';
 import PasswordInput from '../Shared/PasswordInput';
+import FirstNameInput from '../Shared/FirstNameInput';
 
 const SignUpForm = () => {
     const firstNameInputRef = useRef();
@@ -8,7 +9,9 @@ const SignUpForm = () => {
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
 
-    const signUpSubmitHandler = () => {
+    const signUpSubmitHandler = (event) => {
+        event.preventDefault();
+        
         const firstNameInput = firstNameInputRef.current.value;
         const lastNameInput = lastNameInputRef.current.value;
         const emailInput = emailInputRef.current.value;
@@ -27,15 +30,7 @@ const SignUpForm = () => {
                     justifyContent="space-around"
                 >
                     <Grid item>
-                        <TextField
-                            id="first-name-input"
-                            variant="outlined"
-                            label="First Name"
-                            required
-                            margin="normal"
-                            fullWidth
-                            inputRef={firstNameInputRef}
-                        />
+                        <FirstNameInput firstNameInputRef={firstNameInputRef} />
                     </Grid>
                     <Grid item>
                         <TextField
