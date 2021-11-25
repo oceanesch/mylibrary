@@ -26,7 +26,7 @@ const SignUpForm = () => {
         // add validation after here
 
         fetch(
-            'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDe2VlLrzxhf8f_PW46fjEuMfYRy6yDvSY',
+            'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDe2VlLrzxhf8f_PW46fjEuMfYRy6yDvS',
             {
                 method: 'POST',
                 body: JSON.stringify({
@@ -39,10 +39,15 @@ const SignUpForm = () => {
                 headers: { 'Content-Type': 'application/json' },
             }
         ).then((responsePayLoad) => {
+            console.log(responsePayLoad);
             if (responsePayLoad.ok) {
                 navigationHistory('/myshelf');
             } else {
-                //do something if you get an error
+                return responsePayLoad.json().then((responseData) => {
+                    console.log(responseData);
+                    // here I retrieve the responseData which hold an error code and
+                    // an error message which I could use to show an error modal or smthg 
+                });
             }
         });
 
