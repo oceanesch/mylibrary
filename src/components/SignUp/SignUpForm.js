@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button, Box, Grid } from '@mui/material';
 
 import PasswordInput from '../Shared/PasswordInput';
@@ -7,6 +8,8 @@ import PasswordInput from '../Shared/PasswordInput';
 import EmailInput from '../Shared/EmailInput';
 
 const SignUpForm = () => {
+    const navigationHistory = useNavigate();
+
     // const firstNameInputRef = useRef();
     // const lastNameInputRef = useRef();
     const emailInputRef = useRef();
@@ -35,14 +38,13 @@ const SignUpForm = () => {
                 }),
                 headers: { 'Content-Type': 'application/json' },
             }
-        )
-        // .then((responsePayLoad) => {
-        //     if(responsePayLoad.ok) {
-        //         //do something w/ the success response 
-        //     } else{
-        //         //do something if you get an error
-        //     }
-        // })
+        ).then((responsePayLoad) => {
+            if (responsePayLoad.ok) {
+                navigationHistory('/myshelf');
+            } else {
+                //do something if you get an error
+            }
+        });
 
         console.log(
             // enteredFirstName,
