@@ -1,8 +1,9 @@
 import { useRef } from 'react';
-import { Button, Box, TextField, Grid } from '@mui/material';
+import { Button, Box, Grid } from '@mui/material';
 import PasswordInput from '../Shared/PasswordInput';
 import FirstNameInput from '../Shared/FirstNameInput';
 import LastNameInput from '../Shared/LastNameInput';
+import EmailInput from '../Shared/EmailInput';
 
 const SignUpForm = () => {
     const firstNameInputRef = useRef();
@@ -37,15 +38,7 @@ const SignUpForm = () => {
                         <LastNameInput lastNameInputRef={lastNameInputRef} />
                     </Grid>
                     <Grid item>
-                        <TextField
-                            id="email-address-input"
-                            variant="outlined"
-                            label="E-Mail Address"
-                            required
-                            type="email"
-                            margin="normal"
-                            inputRef={emailInputRef}
-                        />
+                        <EmailInput emailInputRef={emailInputRef} />
                     </Grid>
                     <Grid item>
                         <PasswordInput passwordInputRef={passwordInputRef} />
