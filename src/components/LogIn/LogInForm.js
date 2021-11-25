@@ -1,17 +1,10 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import {
     Box,
     TextField,
     Grid,
-    FormControl,
-    InputLabel,
-    OutlinedInput,
-    IconButton,
-    InputAdornment,
     Button,
 } from '@mui/material';
-
-import { VisibilityOff, Visibility } from '@mui/icons-material';
 
 import PasswordInput from '../Shared/PasswordInput';
 

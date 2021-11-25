@@ -10,20 +10,16 @@ import {
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const PasswordInput = (props) => {
-    const [passwordInput, setPasswordInput] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-
-    const changeHandler = (event) => {
-        setPasswordInput(event.target.value);
-    };
-
-    const clickShowPasswordHandler = () => {
-        setShowPassword(!showPassword);
-    };
 
     const mouseDownPasswordHandler = (event) => {
         event.preventDefault();
+        setShowPassword(!showPassword);
     };
+
+    const mouseUpPasswordHandler = () => {
+        setShowPassword(!showPassword);
+    }
 
     return (
         <FormControl variant="outlined" margin="normal">
@@ -31,8 +27,6 @@ const PasswordInput = (props) => {
             <OutlinedInput
                 id="password-input"
                 type={showPassword ? 'text' : 'password'}
-                value={passwordInput}
-                onChange={changeHandler}
                 label="password"
                 required
                 inputRef={props.passwordInputRef}
@@ -41,8 +35,8 @@ const PasswordInput = (props) => {
                         <IconButton
                             aria-label="toggle password visibility"
                             edge="end"
-                            onClick={clickShowPasswordHandler}
                             onMouseDown={mouseDownPasswordHandler}
+                            onMouseUp={mouseUpPasswordHandler}
                         >
                             {showPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
