@@ -1,6 +1,10 @@
 import { useRef } from 'react';
-import { Button, Box, TextField, Grid } from '@mui/material';
+import { Button, Box, Grid } from '@mui/material';
+
 import PasswordInput from '../Shared/PasswordInput';
+import FirstNameInput from '../Shared/FirstNameInput';
+import LastNameInput from '../Shared/LastNameInput';
+import EmailInput from '../Shared/EmailInput';
 
 const SignUpForm = () => {
     const firstNameInputRef = useRef();
@@ -8,7 +12,9 @@ const SignUpForm = () => {
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
 
-    const signUpSubmitHandler = () => {
+    const signUpSubmitHandler = (event) => {
+        event.preventDefault();
+
         const firstNameInput = firstNameInputRef.current.value;
         const lastNameInput = lastNameInputRef.current.value;
         const emailInput = emailInputRef.current.value;
@@ -19,44 +25,22 @@ const SignUpForm = () => {
 
     return (
         <Box sx={{ xs: 4 }}>
-            <form onSubmit={signUpSubmitHandler}>
                 <Grid
                     container
                     direction="column"
                     alignItems="center"
                     justifyContent="space-around"
+                    component="form"
+                    onSubmit={signUpSubmitHandler}
                 >
                     <Grid item>
-                        <TextField
-                            id="first-name-input"
-                            variant="outlined"
-                            label="First Name"
-                            required
-                            margin="normal"
-                            fullWidth
-                            inputRef={firstNameInputRef}
-                        />
+                        <FirstNameInput firstNameInputRef={firstNameInputRef} />
                     </Grid>
                     <Grid item>
-                        <TextField
-                            id="last-name-input"
-                            variant="outlined"
-                            label="Last Name"
-                            required
-                            margin="normal"
-                            inputRef={lastNameInputRef}
-                        />
+                        <LastNameInput lastNameInputRef={lastNameInputRef} />
                     </Grid>
                     <Grid item>
-                        <TextField
-                            id="email-address-input"
-                            variant="outlined"
-                            label="E-Mail Address"
-                            required
-                            type="email"
-                            margin="normal"
-                            inputRef={emailInputRef}
-                        />
+                        <EmailInput emailInputRef={emailInputRef} />
                     </Grid>
                     <Grid item>
                         <PasswordInput passwordInputRef={passwordInputRef} />
@@ -71,7 +55,6 @@ const SignUpForm = () => {
                         </Button>
                     </Grid>
                 </Grid>
-            </form>
         </Box>
     );
 };
