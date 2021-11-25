@@ -13,22 +13,9 @@ import {
 
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 
+import PasswordInput from '../Shared/PasswordInput';
+
 const LogInForm = () => {
-    const [passwordInput, setPasswordInput] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
-
-    const changeHandler = (event) => {
-        setPasswordInput(event.target.value);
-    };
-
-    const clickShowPasswordHandler = () => {
-        setShowPassword(!showPassword);
-    };
-
-    const mouseDownPasswordHandler = (event) => {
-        event.preventDefault();
-    };
-
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
 
@@ -38,10 +25,10 @@ const LogInForm = () => {
         const emailInput = emailInputRef.current.value;
         const passwordInput = passwordInputRef.current.value;
 
-        console.log(emailInput, passwordInput)
+        console.log(emailInput, passwordInput);
 
-        emailInputRef.current.value=""
-        passwordInputRef.current.value=""
+        emailInputRef.current.value = '';
+        passwordInputRef.current.value = '';
     };
 
     return (
@@ -65,38 +52,7 @@ const LogInForm = () => {
                         />
                     </Grid>
                     <Grid item>
-                        <FormControl variant="outlined" margin="normal">
-                            <InputLabel htmlFor="password-input">
-                                Password
-                            </InputLabel>
-                            <OutlinedInput
-                                id="password-input"
-                                type={showPassword ? 'text' : 'password'}
-                                value={passwordInput}
-                                onChange={changeHandler}
-                                label="password"
-                                required
-                                inputRef={passwordInputRef}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            edge="end"
-                                            onClick={clickShowPasswordHandler}
-                                            onMouseDown={
-                                                mouseDownPasswordHandler
-                                            }
-                                        >
-                                            {showPassword ? (
-                                                <VisibilityOff />
-                                            ) : (
-                                                <Visibility />
-                                            )}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                            ></OutlinedInput>
-                        </FormControl>
+                        <PasswordInput passwordInputRef={passwordInputRef} />
                     </Grid>
                     <Grid item>
                         <Button
