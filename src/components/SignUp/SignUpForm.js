@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { Button, Box, Grid } from '@mui/material';
+
 import PasswordInput from '../Shared/PasswordInput';
 import FirstNameInput from '../Shared/FirstNameInput';
 import LastNameInput from '../Shared/LastNameInput';
@@ -24,12 +25,13 @@ const SignUpForm = () => {
 
     return (
         <Box sx={{ xs: 4 }}>
-            <form onSubmit={signUpSubmitHandler}>
                 <Grid
                     container
                     direction="column"
                     alignItems="center"
                     justifyContent="space-around"
+                    component="form"
+                    onSubmit={signUpSubmitHandler}
                 >
                     <Grid item>
                         <FirstNameInput firstNameInputRef={firstNameInputRef} />
@@ -53,7 +55,6 @@ const SignUpForm = () => {
                         </Button>
                     </Grid>
                 </Grid>
-            </form>
         </Box>
     );
 };
