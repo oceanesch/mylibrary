@@ -7,7 +7,6 @@ import PasswordInput from '../Shared/PasswordInput';
 // import LastNameInput from '../Shared/LastNameInput';
 import EmailInput from '../Shared/EmailInput';
 
-
 const SignUpForm = () => {
     const navigationHistory = useNavigate();
 
@@ -46,6 +45,14 @@ const SignUpForm = () => {
             } else {
                 return responsePayLoad.json().then((responseData) => {
                     console.log(responseData);
+                    if (
+                        responseData &&
+                        responseData.error &&
+                        responseData.error.message
+                    ) {
+                        const errorMessage = responseData.error.message;
+                        alert(errorMessage)
+                    }
                 });
             }
         });
