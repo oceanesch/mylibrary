@@ -46,6 +46,14 @@ const SignUpForm = () => {
             } else {
                 return responsePayLoad.json().then((responseData) => {
                     console.log(responseData);
+                    if (
+                        responseData &&
+                        responseData.error &&
+                        responseData.error.message
+                    ) {
+                        const errorMessage = responseData.error.message;
+                        alert(errorMessage)
+                    }
                 });
             }
         });
