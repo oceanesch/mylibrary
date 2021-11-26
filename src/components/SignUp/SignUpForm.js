@@ -7,6 +7,7 @@ import PasswordInput from '../Shared/PasswordInput';
 // import LastNameInput from '../Shared/LastNameInput';
 import EmailInput from '../Shared/EmailInput';
 
+
 const SignUpForm = () => {
     const navigationHistory = useNavigate();
 
@@ -26,7 +27,7 @@ const SignUpForm = () => {
         // add validation after here
 
         fetch(
-            'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDe2VlLrzxhf8f_PW46fjEuMfYRy6yDvS',
+            'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDe2VlLrzxhf8f_PW46fjEuMfYRy6yDvSY',
             {
                 method: 'POST',
                 body: JSON.stringify({
@@ -45,8 +46,6 @@ const SignUpForm = () => {
             } else {
                 return responsePayLoad.json().then((responseData) => {
                     console.log(responseData);
-                    // here I retrieve the responseData which hold an error code and
-                    // an error message which I could use to show an error modal or smthg 
                 });
             }
         });
