@@ -7,6 +7,7 @@ import PasswordInput from '../Shared/PasswordInput';
 // import LastNameInput from '../Shared/LastNameInput';
 import EmailInput from '../Shared/EmailInput';
 
+
 const SignUpForm = () => {
     const navigationHistory = useNavigate();
 
