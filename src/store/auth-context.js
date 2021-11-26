@@ -20,7 +20,18 @@ export const AuthContextProvider = (props) => {
         setToken(null);
     };
 
-    return <AuthContext.Provider>{props.children}</AuthContext.Provider>;
+    const contextValue = {
+        token: token,
+        isLoggedIn: userIsLoggedIn,
+        logIn: logInHandler,
+        logOut: logOutHandler,
+    };
+
+    return (
+        <AuthContext.Provider value={contextValue}>
+            {props.children}
+        </AuthContext.Provider>
+    );
 };
 
 export default AuthContext;
