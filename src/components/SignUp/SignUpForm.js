@@ -40,7 +40,6 @@ const SignUpForm = () => {
                 headers: { 'Content-Type': 'application/json' },
             }
         ).then((responsePayLoad) => {
-            console.log(responsePayLoad);
             if (responsePayLoad.ok) {
                 navigationHistory('/myshelf');
             } else {
