@@ -5,8 +5,14 @@ import logo from './logo/logo.png';
 import classes from './MainNavigation.module.css';
 import Typography from '@mui/material/Typography';
 import { Link as RouterLink } from 'react-router-dom';
+import { useContext } from 'react';
+import AuthContext from '../../store/auth-context';
 
 const MainNavigation = () => {
+    const authCtx = useContext(AuthContext);
+
+    const isLoggedIn = authCtx.isLoggedIn;
+
     return (
         <AppBar position="static">
             <ToolBar className={classes.mainNav}>
@@ -18,7 +24,7 @@ const MainNavigation = () => {
                     />
                 </RouterLink>
                 <Typography component="div" sx={{ flexGrow: 1 }} />
-                <Button
+                {!isLoggedIn && <Button
                     className={classes.mainNavBtn}
                     variant="contained"
                     disableElevation
@@ -26,7 +32,16 @@ const MainNavigation = () => {
                     to="/login"
                 >
                     Login
-                </Button>
+                </Button>}
+                {isLoggedIn && <Button
+                    className={classes.mainNavBtn}
+                    variant="contained"
+                    disableElevation
+                    component={RouterLink}
+                    to="/login"
+                >
+                    Log Out
+                </Button>}
             </ToolBar>
         </AppBar>
     );

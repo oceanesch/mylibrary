@@ -1,12 +1,14 @@
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Grid, Button } from '@mui/material';
 
 import PasswordInput from '../Shared/PasswordInput';
 import EmailInput from '../Shared/EmailInput';
+import AuthContext from '../../store/auth-context';
 
 const LogInForm = () => {
     const navigationHistory = useNavigate();
+    const authCtx = useContext(AuthContext);
 
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
@@ -51,6 +53,7 @@ const LogInForm = () => {
             })
             .then((responseData) => {
                 console.log(responseData);
+                authCtx.logIn(responseData.idToken);
             })
             .catch((err) => {
                 alert(err.message);
