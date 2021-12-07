@@ -22,16 +22,16 @@ export async function getBooks() {
     return parseResponse;
 }
 
-export async function addNewBook(props) {
+export async function addNewBook(newBook) {
     const httpResponse = await fetch(
         'https://mylibrary-f5f0a-default-rtdb.firebaseio.com/books.json',
         {
             method: 'POST',
-            body: JSON.stringify(props.newBook),
+            body: JSON.stringify(newBook),
             headers: { 'Content-Type': 'application/json' },
         }
     );
 
-    const parseResponse = await httpResponse.json;
+    const parseResponse = await httpResponse.json();
     console.log(parseResponse);
 }

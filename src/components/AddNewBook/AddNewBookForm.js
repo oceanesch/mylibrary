@@ -14,15 +14,17 @@ const AddNewBookForm = () => {
         const newBook = {
             id: Math.random(),
             title: titleInputRef.current.value,
-            author: authorInputRef.current.value, 
-            image: coverInputRef.current.value
-        }
+            author: authorInputRef.current.value,
+            image: coverInputRef.current.value,
+        };
 
-        console.log(newBook)
+        console.log(newBook);
 
-        titleInputRef.current.value = '';
-        authorInputRef.current.value = '';
-        coverInputRef.current.value = '';
+        addNewBook(newBook);
+
+        // titleInputRef.current.value = '';
+        // authorInputRef.current.value = '';
+        // coverInputRef.current.value = '';
     };
 
     return (
