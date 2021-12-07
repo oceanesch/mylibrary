@@ -1,6 +1,7 @@
-import React from 'react';
-import classes from './BookList.module.css'
+import React, { useState, useEffect } from 'react';
+import classes from './BookList.module.css';
 import BookItem from './BookItem';
+import { getBooks } from '../../libs/api';
 
 // const DUMMY_BOOKS = [
 //     {
@@ -66,12 +67,21 @@ import BookItem from './BookItem';
 // ];
 
 const BookList = () => {
+    const [books, setBooks] = useState([]);
+
+    useEffect(() => {
+        getBooks().then((data) => {
+            setBooks(Object.values(data));
+        });
+    }, []);
+
     return (
         <ul className={classes.bookList}>
-            {DUMMY_BOOKS.map((book) => {
+            {books.map((book) => {
                 return (
                     <BookItem
                         key={book.id}
+                        id={book.id}
                         title={book.title}
                         author={book.author}
                         image={book.image}

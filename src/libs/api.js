@@ -18,4 +18,6 @@ export async function getBooks() {
     );
 
     const parseData = await httpResponse.json();
+
+    return parseData
 }
