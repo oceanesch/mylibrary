@@ -2,11 +2,14 @@ import React, { useRef } from 'react';
 import TextField from '@mui/material/TextField';
 import { Button, Grid } from '@mui/material';
 import { addNewBook } from '../../libs/api';
+import { useNavigate } from 'react-router-dom';
 
 const AddNewBookForm = () => {
     const titleInputRef = useRef();
     const authorInputRef = useRef();
     const coverInputRef = useRef();
+
+    const navigationHistory = useNavigate();
 
     const addNewBookSubmitHandler = (event) => {
         event.preventDefault();
@@ -22,9 +25,7 @@ const AddNewBookForm = () => {
 
         addNewBook(newBook);
 
-        // titleInputRef.current.value = '';
-        // authorInputRef.current.value = '';
-        // coverInputRef.current.value = '';
+        navigationHistory('/myshelf');
     };
 
     return (
