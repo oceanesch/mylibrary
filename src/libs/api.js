@@ -11,3 +11,11 @@ export async function signUp(signUpData) {
     );
     const responseData = await response.json();
 }
+
+export async function getBooks() {
+    const httpResponse = await fetch(
+        'https://mylibrary-f5f0a-default-rtdb.firebaseio.com/books.json'
+    );
+
+    const parseData = await httpResponse.json();
+}
