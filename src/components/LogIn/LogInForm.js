@@ -1,20 +1,63 @@
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, Grid, Button } from '@mui/material';
 
 import PasswordInput from '../Shared/PasswordInput';
 import EmailInput from '../Shared/EmailInput';
+import AuthContext from '../../store/auth-context';
 
 const LogInForm = () => {
+    const navigationHistory = useNavigate();
+    const authCtx = useContext(AuthContext);
+
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
 
     const LogInSubmitHandler = (event) => {
         event.preventDefault();
 
-        const emailInput = emailInputRef.current.value;
-        const passwordInput = passwordInputRef.current.value;
+        const enteredEmail = emailInputRef.current.value;
+        const enteredPassword = passwordInputRef.current.value;
 
-        console.log(emailInput, passwordInput);
+        console.log(enteredEmail, enteredPassword);
+
+        fetch(
+            'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDe2VlLrzxhf8f_PW46fjEuMfYRy6yDvSY',
+            {
+                method: 'POST',
+                body: JSON.stringify({
+                    email: enteredEmail,
+                    password: enteredPassword,
+                    returnSecureToken: true,
+                }),
+                headers: { 'Content-Type': 'application/json' },
+            }
+        )
+            .then((response) => {
+                if (response.ok) {
+                    navigationHistory('/myshelf');
+                    return response.json();
+                } else {
+                    return response.json().then((responseData) => {
+                        let errorMessage = 'Authentication failed';
+                        if (
+                            responseData &&
+                            responseData.error &&
+                            responseData.error.message
+                        ) {
+                            errorMessage = responseData.error.message;
+                        }
+                        throw new Error(errorMessage);
+                    });
+                }
+            })
+            .then((responseData) => {
+                console.log(responseData);
+                authCtx.logIn(responseData.idToken);
+            })
+            .catch((err) => {
+                alert(err.message);
+            });
 
         emailInputRef.current.value = '';
         passwordInputRef.current.value = '';
