@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import TextField from '@mui/material/TextField';
 import { Button, Grid } from '@mui/material';
+import { addNewBook } from '../../libs/api';
 
 const AddNewBookForm = () => {
     const titleInputRef = useRef();
@@ -9,11 +10,15 @@ const AddNewBookForm = () => {
 
     const addNewBookSubmitHandler = (event) => {
         event.preventDefault();
-        const titleInput = titleInputRef.current.value;
-        const authorInput = authorInputRef.current.value;
-        const coverInput = coverInputRef.current.value;
 
-        console.log(titleInput, authorInput, coverInput);
+        const newBook = {
+            id: Math.random(),
+            title: titleInputRef.current.value,
+            author: authorInputRef.current.value, 
+            image: coverInputRef.current.value
+        }
+
+        console.log(newBook)
 
         titleInputRef.current.value = '';
         authorInputRef.current.value = '';
