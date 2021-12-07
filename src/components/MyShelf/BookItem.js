@@ -1,4 +1,11 @@
-import { Card, CardContent, CardMedia, Typography } from '@mui/material';
+import {
+    Card,
+    CardContent,
+    CardMedia,
+    Typography,
+    IconButton,
+} from '@mui/material';
+import { Delete, Edit } from '@mui/icons-material';
 import React from 'react';
 import classes from './BookItem.module.css';
 
@@ -27,6 +34,14 @@ const BookItem = (props) => {
                     <Typography component="h6" variant="overline">
                         {props.author}
                     </Typography>
+                </CardContent>
+                <CardContent>
+                    <IconButton aria-label="modify book">
+                        <Edit />
+                    </IconButton>
+                    <IconButton aria-label="delete book">
+                        <Delete />
+                    </IconButton>
                 </CardContent>
             </Card>
         </React.Fragment>
