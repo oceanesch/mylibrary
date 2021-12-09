@@ -10,6 +10,12 @@ import React from 'react';
 import classes from './BookItem.module.css';
 
 const BookItem = (props) => {
+    const deleteButtonHandler = (event) => {
+        event.preventDefault();
+        const deletedBookID = props.id
+        props.onSaveDeletedBookId(deletedBookID)
+    };
+
     return (
         <React.Fragment>
             <Card
@@ -39,7 +45,7 @@ const BookItem = (props) => {
                     <IconButton aria-label="modify book">
                         <Edit />
                     </IconButton>
-                    <IconButton aria-label="delete book">
+                    <IconButton aria-label="delete book" onClick={deleteButtonHandler}>
                         <Delete />
                     </IconButton>
                 </CardContent>

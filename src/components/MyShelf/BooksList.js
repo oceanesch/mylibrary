@@ -75,6 +75,18 @@ const BookList = () => {
         });
     }, []);
 
+    const deleteBookHandler = (deletedBookID) => {
+        const bookIndex = books.findIndex((book) => book.id === deletedBookID);
+
+        const deletedBook = books[bookIndex];
+
+        const newBooksArray = books.filter((book) => {
+            return book !== deletedBook;
+        });
+
+        setBooks(newBooksArray);
+    };
+
     return (
         <ul className={classes.bookList}>
             {books.map((book) => {
@@ -85,6 +97,7 @@ const BookList = () => {
                         title={book.title}
                         author={book.author}
                         image={book.image}
+                        onSaveDeletedBookId={deleteBookHandler}
                     />
                 );
             })}
