@@ -1,17 +1,30 @@
-p {
-    font-family: 'Zen Kaku Gothic Antique';
-}
-
-h1,
-h2 {
-    font-family: 'Mate SC';
-    color: #ffecb9;
-}
-
 .mainTitle {
     font-family: 'Mate SC';
-    font-size: 80px;
+    font-size: 3.5rem;
+    font-weight: bold;
     text-align: center;
-    color: #ffecb9;
-;
+    color: #f39189;
+    padding-top: 1.5rem;
+}
+
+@media(min-width:900px) {
+    .mainBody {
+        flex-direction: row;
+    }
+}
+
+.card {
+    font-family: 'Zen Kaku Gothic Antique';
+    font-size: 2rem; 
+    text-align: justify;
+    border: solid 3px #FFDCB8;
+    box-shadow: 0 0 10px 4px #FFDCB8 ;
+    margin-top: 1.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 1rem; 
+}
+
+.cardTitle {
+
 }
