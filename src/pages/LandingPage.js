@@ -10,7 +10,6 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-import Card from '../components/UI/Card';
 import MainNavigation from '../components/Layout/MainNavigation';
 
 const LandingPage = () => {
@@ -28,7 +27,7 @@ const LandingPage = () => {
                     // alignItems="center"
                     // justifyContent="space-around"
                 >
-                    <Grid item xs={1} md={4}>
+                    <Grid item xs={1} md={6}>
                         <Box className={styles.card}>
                             MyLibrary is an app that helps you track your books.
                             You can add the books you read and from there, add
@@ -37,7 +36,7 @@ const LandingPage = () => {
                             will help you with your future reading.
                         </Box>
                     </Grid>
-                    <Grid item xs={1} md={4}>
+                    <Grid item xs={1} md={6}>
                         <Box className={styles.card}>
                             <Stack
                                 justifyContent="space-evenly"
@@ -50,14 +49,19 @@ const LandingPage = () => {
                                     className={styles.cardTitle}
                                 >
                                     JOIN MYLIBRARY AND START TRACKING YOUR
-                                    READING NOW
+                                    READING NOW !
                                 </Typography>
                                 <img
                                     src="https://media.istockphoto.com/photos/stack-of-books-on-living-coral-background-picture-id1151417884?b=1&k=20&m=1151417884&s=170667a&w=0&h=A2Roz8X3rEyoV45LeWbybx9i0TtRqdch2qlgJKZHGlU="
                                     alt="stack of books"
-                                    height="300px"
+                                    height="400px"
                                 />
-                                <Button component={RouterLink} to="/signup">
+                                <Button
+                                    variant="contained"
+                                    component={RouterLink}
+                                    to="/signup"
+                                    className={styles.cardButton}
+                                >
                                     SIGN UP
                                 </Button>
                             </Stack>

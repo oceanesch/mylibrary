@@ -10,6 +10,7 @@
 @media(min-width:900px) {
     .mainBody {
         flex-direction: row;
+        justify-content: space-evenly;
     }
 }
 
@@ -26,5 +27,12 @@
 }
 
 .cardTitle {
+    font-family: 'Mate SC';
+    font-size: 2rem;
+    color: #BB8082;
+}
 
+.cardButton {
+    background-color: #f39189;
+    color: white;
 }
