@@ -4,35 +4,43 @@
     font-weight: bold;
     text-align: center;
     color: #f39189;
-    padding-top: 1.5rem;
+    margin: 2rem 0;
 }
 
-@media(min-width:900px) {
+@media (min-width: 900px) {
     .mainBody {
         flex-direction: row;
         justify-content: space-evenly;
+        align-items: center;
+    }
+
+    .gridItem {
+        max-width: 36rem !important;
     }
 }
 
 .card {
     font-family: 'Zen Kaku Gothic Antique';
-    font-size: 2rem; 
+    font-size: 2rem;
     text-align: justify;
-    border: solid 3px #FFDCB8;
-    box-shadow: 0 0 10px 4px #FFDCB8 ;
-    margin-top: 1.5rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    padding: 1rem; 
+    border: solid 3px #ffdcb8;
+    box-shadow: 0 0 10px 4px #ffdcb8;
+    margin-top: 3rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
 }
 
 .cardTitle {
     font-family: 'Mate SC';
     font-size: 2rem;
-    color: #BB8082;
+    color: #bb8082;
+    margin: 2rem 0;
 }
 
 .cardButton {
     background-color: #f39189;
     color: white;
+    margin: 2rem 0;
 }

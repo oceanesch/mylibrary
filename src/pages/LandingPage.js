@@ -27,7 +27,7 @@ const LandingPage = () => {
                     // alignItems="center"
                     // justifyContent="space-around"
                 >
-                    <Grid item xs={1} md={6}>
+                    <Grid item xs={1} md={6} className={styles.gridItem}>
                         <Box className={styles.card}>
                             MyLibrary is an app that helps you track your books.
                             You can add the books you read and from there, add
@@ -36,12 +36,12 @@ const LandingPage = () => {
                             will help you with your future reading.
                         </Box>
                     </Grid>
-                    <Grid item xs={1} md={6}>
+                    <Grid item xs={1} md={6} className={styles.gridItem}>
                         <Box className={styles.card}>
                             <Stack
                                 justifyContent="space-evenly"
                                 alignItems="center"
-                                spacing={2}
+                                // spacing={2}
                                 textAlign="center"
                             >
                                 <Typography
