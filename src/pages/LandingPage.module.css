@@ -41,12 +41,17 @@
 
 .cardButton {
     background-color: #f39189;
+    font-family: 'Lora';
+    font-size: 1rem;
+    font-weight: 500;
+    font-style: italic;
     color: white;
     margin: 2rem 0;
 }
 
-.button:hover,
-.button:active {
-    background-color: #ffeebb;
+.cardButton:hover,
+.cardButton:active {
+    background-color: white;
+    border: 3px solid #f39189;
     color: #f39189;
 }
