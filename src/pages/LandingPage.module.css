@@ -44,3 +44,9 @@
     color: white;
     margin: 2rem 0;
 }
+
+.button:hover,
+.button:active {
+    background-color: #ffeebb;
+    color: #f39189;
+}
