@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import classes from './BookList.module.css';
+import Grid from '@mui/material/Grid';
 import BookItem from './BookItem';
 import { getBooks } from '../../libs/api';
 
@@ -88,20 +88,27 @@ const BookList = () => {
     };
 
     return (
-        <ul className={classes.bookList}>
+        <Grid
+            container
+            direction={{ xs: 'column', sm: 'row' }}
+            spacing={1}
+            justifyContent="space-evenly"
+        >
             {books.map((book) => {
                 return (
-                    <BookItem
-                        key={book.id}
-                        id={book.id}
-                        title={book.title}
-                        author={book.author}
-                        image={book.image}
-                        onSaveDeletedBookId={deleteBookHandler}
-                    />
+                    <Grid item>
+                        <BookItem
+                            key={book.id}
+                            id={book.id}
+                            title={book.title}
+                            author={book.author}
+                            image={book.image}
+                            onSaveDeletedBookId={deleteBookHandler}
+                        />
+                    </Grid>
                 );
             })}
-        </ul>
+        </Grid>
     );
 };
 
