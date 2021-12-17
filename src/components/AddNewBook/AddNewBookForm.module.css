@@ -1,0 +1,30 @@
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 75vh;
+}
+
+@media (min-width: 700px) {
+    form {
+        width: 50vw;
+        max-width: 750px;
+    }
+}
+
+.button {
+    background-color: #f39189;
+    font-family: 'Lora';
+    font-size: 1.5rem;
+    font-weight: 500;
+    font-style: italic;
+    color: white;
+    margin: 2rem 0;
+}
+
+.button:hover,
+.button:active {
+    background-color: white;
+    border: 3px solid #f39189;
+    color: #f39189;
+}
