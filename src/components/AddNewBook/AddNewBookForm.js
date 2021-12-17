@@ -4,7 +4,6 @@ import styles from './AddNewBookForm.module.css';
 import { StyledEngineProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
 import { addNewBook } from '../../libs/api';
 
 const AddNewBookForm = () => {
@@ -34,7 +33,10 @@ const AddNewBookForm = () => {
     return (
         <React.Fragment>
             <StyledEngineProvider>
-                <form onSubmit={addNewBookSubmitHandler}>
+                <form
+                    onSubmit={addNewBookSubmitHandler}
+                    className={styles.newBookForm}
+                >
                     <TextField
                         id="title-input"
                         variant="outlined"
