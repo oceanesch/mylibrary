@@ -1,0 +1,6 @@
+@media (min-width: 600px) {
+    .formInput {
+        width: 50vw;
+        max-width: 750px;
+    }
+}

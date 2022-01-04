@@ -1,3 +1,5 @@
+import styles from './Input.module.css'
+
 import { TextField } from '@mui/material';
 
 const EmailInput = (props) => {
@@ -10,6 +12,7 @@ const EmailInput = (props) => {
             type="email"
             margin="normal"
             inputRef={props.emailInputRef}
+            className={styles.formInput}
         />
     );
 };

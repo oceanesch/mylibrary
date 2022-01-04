@@ -1,12 +1,13 @@
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Box, Grid } from '@mui/material';
+import styles from './SignUpForm.module.css';
+import { StyledEngineProvider } from '@mui/material/styles';
+import Button from '@mui/material/Button';
 
 import PasswordInput from '../Shared/PasswordInput';
 // import FirstNameInput from '../Shared/FirstNameInput';
 // import LastNameInput from '../Shared/LastNameInput';
 import EmailInput from '../Shared/EmailInput';
-
 
 const SignUpForm = () => {
     const navigationHistory = useNavigate();
@@ -51,7 +52,7 @@ const SignUpForm = () => {
                         responseData.error.message
                     ) {
                         const errorMessage = responseData.error.message;
-                        alert(errorMessage)
+                        alert(errorMessage);
                     }
                 });
             }
@@ -66,34 +67,31 @@ const SignUpForm = () => {
     };
 
     return (
-        <Box sx={{ xs: 4 }}>
-            <Grid
-                container
-                direction="column"
-                alignItems="center"
-                justifyContent="space-around"
-                component="form"
-                onSubmit={signUpSubmitHandler}
-            >
+        <StyledEngineProvider injectFirst>
+            <form onSubmit={signUpSubmitHandler} className={styles.signUpForm}>
                 {/* <Grid item>
                     <FirstNameInput firstNameInputRef={firstNameInputRef} />
                 </Grid>
                 <Grid item>
                     <LastNameInput lastNameInputRef={lastNameInputRef} />
                 </Grid> */}
-                <Grid item>
-                    <EmailInput emailInputRef={emailInputRef} />
-                </Grid>
-                <Grid item>
-                    <PasswordInput passwordInputRef={passwordInputRef} />
-                </Grid>
-                <Grid item>
-                    <Button variant="outlined" margin="normal" type="submit">
-                        Sign Up
-                    </Button>
-                </Grid>
-            </Grid>
-        </Box>
+
+                <EmailInput
+                    emailInputRef={emailInputRef}
+                />
+                <PasswordInput
+                    passwordInputRef={passwordInputRef}
+                />
+                <Button
+                    variant="outlined"
+                    margin="normal"
+                    type="submit"
+                    className={styles.button}
+                >
+                    Sign Up
+                </Button>
+            </form>
+        </StyledEngineProvider>
     );
 };
 

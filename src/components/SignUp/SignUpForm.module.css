@@ -1,15 +1,8 @@
-.newBookForm {
+.signUpForm {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    height: 75vh;
-}
-
-@media (min-width: 700px) {
-    .newBookForm {
-        width: 50vw;
-        max-width: 750px;
-    }
+    justify-content: space-around;
+    height: 70vh;
 }
 
 .button {
@@ -27,4 +20,11 @@
     background-color: white;
     border: 3px solid #f39189;
     color: #f39189;
+}
+
+@media (min-width: 600px) {
+    .signUpForm {
+       justify-content: flex-start;
+       align-items: center;
+    }
 }

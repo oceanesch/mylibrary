@@ -1,6 +1,10 @@
 import { useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Grid, Button } from '@mui/material';
+
+import styles from '../SignUp/SignUpForm.module.css';
+import { StyledEngineProvider } from '@mui/material/styles';
+
+import Button from '@mui/material/Button';
 
 import PasswordInput from '../Shared/PasswordInput';
 import EmailInput from '../Shared/EmailInput';
@@ -64,28 +68,20 @@ const LogInForm = () => {
     };
 
     return (
-        <Box sx={{ xs: 4 }}>
-            <Grid
-                container
-                direction="column"
-                alignItems="center"
-                justifyContent="space-around"
-                component="form"
-                onSubmit={LogInSubmitHandler}
-            >
-                <Grid item>
-                    <EmailInput emailInputRef={emailInputRef} />
-                </Grid>
-                <Grid item>
-                    <PasswordInput passwordInputRef={passwordInputRef} />
-                </Grid>
-                <Grid item>
-                    <Button variant="outlined" margin="normal" type="submit">
-                        Sign Up
-                    </Button>
-                </Grid>
-            </Grid>
-        </Box>
+        <StyledEngineProvider injectFirst>
+            <form onSubmit={LogInSubmitHandler} className={styles.signUpForm}>
+                <EmailInput emailInputRef={emailInputRef} />
+                <PasswordInput passwordInputRef={passwordInputRef} />
+                <Button
+                    variant="outlined"
+                    margin="normal"
+                    type="submit"
+                    className={styles.button}
+                >
+                    Sign Up
+                </Button>
+            </form>
+        </StyledEngineProvider>
     );
 };
 
