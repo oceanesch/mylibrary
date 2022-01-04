@@ -78,11 +78,9 @@ const SignUpForm = () => {
 
                 <EmailInput
                     emailInputRef={emailInputRef}
-                    className={styles.signUpFormInput}
                 />
                 <PasswordInput
                     passwordInputRef={passwordInputRef}
-                    className={styles.signUpFormInput}
                 />
                 <Button
                     variant="outlined"

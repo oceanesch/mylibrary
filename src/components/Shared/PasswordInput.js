@@ -1,4 +1,7 @@
 import { useState } from 'react';
+
+import styles from './Input.module.css';
+
 import {
     FormControl,
     InputLabel,
@@ -8,7 +11,6 @@ import {
 } from '@mui/material';
 
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-
 const PasswordInput = (props) => {
     const [showPassword, setShowPassword] = useState(false);
 
@@ -19,10 +21,14 @@ const PasswordInput = (props) => {
 
     const mouseUpPasswordHandler = () => {
         setShowPassword(!showPassword);
-    }
+    };
 
     return (
-        <FormControl variant="outlined" margin="normal">
+        <FormControl
+            variant="outlined"
+            margin="normal"
+            className={styles.formInput}
+        >
             <InputLabel htmlFor="password-input">Password</InputLabel>
             <OutlinedInput
                 id="password-input"
