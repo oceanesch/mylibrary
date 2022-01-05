@@ -1,4 +1,8 @@
 import { initializeApp } from 'firebase/app';
+// Follow this pattern to import other Firebase services:
+// import {} from 'firebase/<service>';
+
+import { getDatabase } from 'firebase/database';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -12,3 +16,12 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
+/* A firebase app is a container type object which store the shared configuration and 
+share the authentication between Firebase services  */
+
+//Get a reference to the database service
+
+const database = getDatabase(app);
+
+export default database;
