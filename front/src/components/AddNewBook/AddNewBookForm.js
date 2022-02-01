@@ -4,7 +4,7 @@ import styles from './AddNewBookForm.module.css';
 import { StyledEngineProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { addNewBook } from '../../libs/api';
+// import { addNewBook } from '../../libs/api';
 
 const AddNewBookForm = () => {
     const titleInputRef = useRef();
@@ -25,7 +25,7 @@ const AddNewBookForm = () => {
 
         console.log(newBook);
 
-        addNewBook(newBook);
+        // addNewBook(newBook);
 
         navigationHistory('/myshelf');
     };

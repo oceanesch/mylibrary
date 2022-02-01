@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import LandingPage from '../src/pages/LandingPage';
+import LandingPage from './pages/LandingPage';
 import MyShelf from './pages/MyShelfPage';
 import AddNewBook from './pages/AddNewBookPage';
 import SignUp from './pages/SignUpPage';
