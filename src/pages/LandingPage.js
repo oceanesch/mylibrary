@@ -15,8 +15,8 @@ import MainNavigation from '../components/Layout/MainNavigation';
 const LandingPage = () => {
     return (
         <React.Fragment>
+            <MainNavigation />
             <StyledEngineProvider injectFirst>
-                <MainNavigation />
                 <Typography component="h1" className={styles.mainTitle}>
                     Welcome to MyLibrary
                 </Typography>

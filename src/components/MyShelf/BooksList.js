@@ -3,6 +3,9 @@ import Grid from '@mui/material/Grid';
 import BookItem from './BookItem';
 import { getBooks } from '../../libs/api';
 
+import database from '../../api/firebaseConfig/firebaseConfig';
+import { ref, onValue } from 'firebase/database';
+
 // const DUMMY_BOOKS = [
 //     {
 //         id: 'book1',
@@ -70,9 +73,16 @@ const BookList = () => {
     const [books, setBooks] = useState([]);
 
     useEffect(() => {
-        getBooks().then((data) => {
-            setBooks(Object.values(data));
+        // getBooks().then((data) => {
+        //     setBooks(Object.values(data));
+        // })
+        const shelfRef = ref(database, 'shelves/shelf1');
+        onValue(shelfRef, (snapshot) => {
+            const booksData = snapshot.val();
+            console.log(booksData);
+            setBooks(Object.values(booksData));
         });
+        console.log(books);
     }, []);
 
     const deleteBookHandler = (deletedBookID) => {
