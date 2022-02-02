@@ -7,68 +7,74 @@ import Button from '@mui/material/Button';
 // import { addNewBook } from '../../libs/api';
 
 const AddNewBookForm = () => {
-    const titleInputRef = useRef();
-    const authorInputRef = useRef();
-    const coverInputRef = useRef();
+  const titleInputRef = useRef();
+  const authorInputRef = useRef();
+  const coverInputRef = useRef();
 
-    const navigationHistory = useNavigate();
+  const navigationHistory = useNavigate();
 
-    const addNewBookSubmitHandler = (event) => {
-        event.preventDefault();
+  const addNewBookSubmitHandler = (event) => {
+    event.preventDefault();
 
-        const newBook = {
-            id: Math.random(),
-            title: titleInputRef.current.value,
-            author: authorInputRef.current.value,
-            image: coverInputRef.current.value,
-        };
+    const title = titleInputRef.current.value;
+    const author = authorInputRef.current.value;
+    const image = coverInputRef.current.value;
 
-        console.log(newBook);
+    console.log(title, author, image);
 
-        // addNewBook(newBook);
+    fetch('http://localhost:8080/addnewbook', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: title, author: author, image: image }),
+    })
+      .then((res) => {
+        if (res.status !== 200 || res.status !== 201) {
+          throw new Error('Adding a new book failed');
+        }
+        return res.json();
+      })
+      .then((responseData) => {
+        console.log(responseData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
-        navigationHistory('/myshelf');
-    };
+    navigationHistory('/myshelf');
+  };
 
-    return (
-        <React.Fragment>
-            <StyledEngineProvider>
-                <form
-                    onSubmit={addNewBookSubmitHandler}
-                    className={styles.newBookForm}
-                >
-                    <TextField
-                        id="title-input"
-                        variant="outlined"
-                        label="Title"
-                        required
-                        inputRef={titleInputRef}
-                    />
-                    <TextField
-                        id="author-input"
-                        variant="outlined"
-                        label="Author"
-                        required
-                        inputRef={authorInputRef}
-                    />
-                    <TextField
-                        id="image-input"
-                        variant="outlined"
-                        label="URL of the cover"
-                        required
-                        inputRef={coverInputRef}
-                    />
-                    <Button
-                        variant="outlined"
-                        type="submit"
-                        className={styles.button}
-                    >
-                        Submit
-                    </Button>
-                </form>
-            </StyledEngineProvider>
-        </React.Fragment>
-    );
+  return (
+    <React.Fragment>
+      <StyledEngineProvider>
+        <form onSubmit={addNewBookSubmitHandler} className={styles.newBookForm}>
+          <TextField
+            id="title-input"
+            variant="outlined"
+            label="Title"
+            required
+            inputRef={titleInputRef}
+          />
+          <TextField
+            id="author-input"
+            variant="outlined"
+            label="Author"
+            required
+            inputRef={authorInputRef}
+          />
+          <TextField
+            id="image-input"
+            variant="outlined"
+            label="URL of the cover"
+            required
+            inputRef={coverInputRef}
+          />
+          <Button variant="outlined" type="submit" className={styles.button}>
+            Submit
+          </Button>
+        </form>
+      </StyledEngineProvider>
+    </React.Fragment>
+  );
 };
 
 export default AddNewBookForm;
