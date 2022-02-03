@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import BookItem from './BookItem';
-// import { getBooks } from '../../libs/api';
 
 // const DUMMY_BOOKS = [
 //     {
@@ -69,6 +69,8 @@ import BookItem from './BookItem';
 const BookList = () => {
   const [books, setBooks] = useState([]);
 
+  const navigationHistory = useNavigate();
+
   useEffect(() => {
     fetch('http://localhost:8080/myshelf')
       .then((response) => {
@@ -84,15 +86,36 @@ const BookList = () => {
   }, []);
 
   const deleteBookHandler = (deletedBookID) => {
-    const bookIndex = books.findIndex((book) => book.id === deletedBookID);
+    fetch('http://localhost:8080/myshelf/' + deletedBookID, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error('Deleting book failed');
+        }
+        return response.json();
+      })
+      .then((responseData) => {
+        console.log(responseData);
 
-    const deletedBook = books[bookIndex];
+        const updatedBooks = books.filter((book) => book._id !== deletedBookID);
+        setBooks(updatedBooks);
 
-    const newBooksArray = books.filter((book) => {
-      return book !== deletedBook;
-    });
+        //Why this doesn't work ??
+        // setBooks((prevState) => {
+        //   const updatedBooks = prevState.books.filter((book) => {
+        //     return book._id !== deletedBookID;
+        //   });
+        //   return { books: updatedBooks };
+        // });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-    setBooks(newBooksArray);
+  const editBookHandler = (editedBookId) => {
+    navigationHistory('/editbook');
   };
 
   return (
@@ -111,6 +134,7 @@ const BookList = () => {
               author={book.author}
               image={book.image}
               onSaveDeletedBookId={deleteBookHandler}
+              onEditBook={editBookHandler}
             />
           </Grid>
         );

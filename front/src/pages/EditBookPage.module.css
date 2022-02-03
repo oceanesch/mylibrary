@@ -1,0 +1,25 @@
+.mainTitle {
+  font-family: 'Mate SC';
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #f39189;
+  margin: 2rem 0;
+}
+
+.logo {
+  display: none;
+}
+
+@media (min-width: 700px) {
+  .logo {
+    display: block;
+    width: 300px;
+  }
+
+  .mainSection {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+}

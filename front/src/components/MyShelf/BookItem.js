@@ -12,17 +12,19 @@ const BookItem = (props) => {
   const deleteButtonHandler = (event) => {
     event.preventDefault();
     const deletedBookID = props.id;
-    console.log(deletedBookID);
+    // console.log(deletedBookID);
     props.onSaveDeletedBookId(deletedBookID);
+  };
+
+  const editButtonHandler = (event) => {
+    event.preventDefault();
+    const editedBookId = props.id;
+    props.onEditBook(editedBookId);
   };
 
   return (
     <React.Fragment>
-      <Card
-        variant="elevation"
-        elevation={3}
-        className={styles.bookCard}
-      >
+      <Card variant="elevation" elevation={3} className={styles.bookCard}>
         <CardMedia
           component="img"
           image={props.image}
@@ -36,7 +38,7 @@ const BookItem = (props) => {
           <Typography variant="overline">{props.author}</Typography>
         </CardContent>
         <CardActions className={styles.bookCardActions}>
-          <IconButton aria-label="modify book">
+          <IconButton aria-label="modify book" onClick={editButtonHandler}>
             <Edit />
           </IconButton>
           <IconButton aria-label="delete book" onClick={deleteButtonHandler}>

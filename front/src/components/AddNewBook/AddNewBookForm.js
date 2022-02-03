@@ -27,11 +27,11 @@ const AddNewBookForm = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title: title, author: author, image: image }),
     })
-      .then((res) => {
-        if (res.status !== 200 || res.status !== 201) {
+      .then((response) => {
+        if (response.status !== 200 && response.status !== 201) {
           throw new Error('Adding a new book failed');
         }
-        return res.json();
+        return response.json();
       })
       .then((responseData) => {
         console.log(responseData);
