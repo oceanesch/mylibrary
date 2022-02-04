@@ -14,14 +14,12 @@ exports.getBooks = (req, res, next) => {
 };
 
 exports.addNewBook = (req, res, next) => {
-  const title = req.body.title;
-  const author = req.body.author;
-  const image = req.body.image;
+  const { title, author, image } = req.body;
 
   const newBook = new Book({
-    title: title,
-    author: author,
-    image: image,
+    title,
+    author,
+    image,
   });
 
   newBook
@@ -30,12 +28,23 @@ exports.addNewBook = (req, res, next) => {
       console.log(result);
       res.status(200).json({ message: 'New book added' });
     })
-    // .then(() => res.redirect('/myshelf'))
     .catch((error) => console.log(error));
 };
 
-exports.deleteBook = (req, res, next) => {
-  const bookId = req.params.bookId;
+exports.deleteBook = async (req, res, next) => {
+  const { bookId } = req.params;
+
+  // try {
+  //   const book = await Book.findById(bookId);
+
+  //   if (!book) throw new Error('No book found.');
+
+  //   await Book.findByIdAndRemove(bookId);
+
+  //   res.status(200).json({ message: 'Book deleted' });
+  // } catch (error) {
+  //   console.error(error);
+  // }
 
   Book.findById(bookId)
     .then((book) => {

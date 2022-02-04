@@ -12,7 +12,6 @@ const BookItem = (props) => {
   const deleteButtonHandler = (event) => {
     event.preventDefault();
     const deletedBookID = props.id;
-    // console.log(deletedBookID);
     props.onSaveDeletedBookId(deletedBookID);
   };
 

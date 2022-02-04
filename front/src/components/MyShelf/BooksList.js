@@ -72,7 +72,7 @@ const BookList = () => {
   const navigationHistory = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:8080/myshelf')
+    fetch('http://localhost:8080/book')
       .then((response) => {
         if (response.status !== 200) {
           throw new Error('Failed to fetch books.');
@@ -86,7 +86,7 @@ const BookList = () => {
   }, []);
 
   const deleteBookHandler = (deletedBookID) => {
-    fetch('http://localhost:8080/myshelf/' + deletedBookID, {
+    fetch('http://localhost:8080/book/' + deletedBookID, {
       method: 'DELETE',
     })
       .then((response) => {
@@ -101,9 +101,9 @@ const BookList = () => {
         const updatedBooks = books.filter((book) => book._id !== deletedBookID);
         setBooks(updatedBooks);
 
-        //Why this doesn't work ??
+        //TO DO: try again with just prevState.filter
         // setBooks((prevState) => {
-        //   const updatedBooks = prevState.books.filter((book) => {
+        //   const updatedBooks = prevState.filter((book) => {
         //     return book._id !== deletedBookID;
         //   });
         //   return { books: updatedBooks };

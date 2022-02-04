@@ -3,10 +3,11 @@ const router = express.Router();
 
 const myShelfController = require('../controllers/controllers-myShelf');
 
-router.get('/myshelf', myShelfController.getBooks);
+router.get('/book', myShelfController.getBooks);
 
-router.delete('/myshelf/:bookId', myShelfController.deleteBook);
+router.post('/book', myShelfController.addNewBook);
 
-router.post('/addnewbook', myShelfController.addNewBook);
+router.delete('/book/:bookId', myShelfController.deleteBook);
+
 
 module.exports = router;
