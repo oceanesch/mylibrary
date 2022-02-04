@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import BookItem from './BookItem';
-import { getBooks } from '../../libs/api';
-
-import database from '../../api/firebaseConfig/firebaseConfig';
-import { ref, onValue } from 'firebase/database';
 
 // const DUMMY_BOOKS = [
 //     {
@@ -70,56 +67,80 @@ import { ref, onValue } from 'firebase/database';
 // ];
 
 const BookList = () => {
-    const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState([]);
 
-    useEffect(() => {
-        // getBooks().then((data) => {
-        //     setBooks(Object.values(data));
-        // })
-        const shelfRef = ref(database, 'shelves/shelf1');
-        onValue(shelfRef, (snapshot) => {
-            const booksData = snapshot.val();
-            console.log(booksData);
-            setBooks(Object.values(booksData));
-        });
-        console.log(books);
-    }, []);
+  const navigationHistory = useNavigate();
 
-    const deleteBookHandler = (deletedBookID) => {
-        const bookIndex = books.findIndex((book) => book.id === deletedBookID);
+  useEffect(() => {
+    fetch('http://localhost:8080/book')
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error('Failed to fetch books.');
+        }
+        return response.json();
+      })
+      .then((responseData) => {
+        setBooks(responseData.books);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
-        const deletedBook = books[bookIndex];
+  const deleteBookHandler = (deletedBookID) => {
+    fetch('http://localhost:8080/book/' + deletedBookID, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (response.status !== 200) {
+          throw new Error('Deleting book failed');
+        }
+        return response.json();
+      })
+      .then((responseData) => {
+        console.log(responseData);
 
-        const newBooksArray = books.filter((book) => {
-            return book !== deletedBook;
-        });
+        const updatedBooks = books.filter((book) => book._id !== deletedBookID);
+        setBooks(updatedBooks);
 
-        setBooks(newBooksArray);
-    };
+        //TO DO: try again with just prevState.filter
+        // setBooks((prevState) => {
+        //   const updatedBooks = prevState.filter((book) => {
+        //     return book._id !== deletedBookID;
+        //   });
+        //   return { books: updatedBooks };
+        // });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-    return (
-        <Grid
-            container
-            direction={{ xs: 'column', sm: 'row' }}
-            spacing={1}
-            justifyContent="space-evenly"
-        >
-            {books.map((book) => {
-                return (
-                    <Grid item>
-                        <BookItem
-                            key={book.id}
-                            id={book.id}
-                            title={book.title}
-                            author={book.author}
-                            image={book.image}
-                            onSaveDeletedBookId={deleteBookHandler}
-                        />
-                    </Grid>
-                );
-            })}
-        </Grid>
-    );
+  const editBookHandler = (editedBookId) => {
+    navigationHistory('/editbook');
+  };
+
+  return (
+    <Grid
+      container
+      direction={{ xs: 'column', sm: 'row' }}
+      spacing={1}
+      justifyContent="space-evenly"
+    >
+      {books.map((book) => {
+        return (
+          <Grid item key={book._id}>
+            <BookItem
+              id={book._id}
+              title={book.title}
+              author={book.author}
+              image={book.image}
+              onSaveDeletedBookId={deleteBookHandler}
+              onEditBook={editBookHandler}
+            />
+          </Grid>
+        );
+      })}
+    </Grid>
+  );
 };
 
 export default BookList;
