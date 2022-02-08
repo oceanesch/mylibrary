@@ -18,7 +18,6 @@ const SignUpForm = () => {
 
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
-    console.log(enteredEmail, enteredPassword);
 
     //TODO: add validation after here
 
