@@ -5,6 +5,7 @@ import { TextField } from '@mui/material';
 const EmailInput = (props) => {
   return (
     <TextField
+      error={props.error || false}
       id="email-address-input"
       variant="outlined"
       label="E-Mail Address"

@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { validationResult } = require('express-validator/check');
+const { validationResult } = require('express-validator');
 
 const User = require('../models/user');
 
@@ -9,7 +9,8 @@ exports.signUp = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({
-      errorMessage: errors.array(),
+      message: 'Validating user input for signing up failed.',
+      data: errors.array(),
     });
   }
 
