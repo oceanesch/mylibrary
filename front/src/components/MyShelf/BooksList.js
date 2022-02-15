@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import BookItem from './BookItem';
+import AuthContext from '../../store/auth-context';
 
 // const DUMMY_BOOKS = [
 //     {
@@ -71,8 +72,12 @@ const BookList = () => {
 
   const navigationHistory = useNavigate();
 
+  const authCtx = useContext(AuthContext);
+
   useEffect(() => {
-    fetch('http://localhost:8080/book')
+    fetch('http://localhost:8080/book', {
+      headers: { Authorization: 'Bearer ' + authCtx.token },
+    })
       .then((response) => {
         if (response.status !== 200) {
           throw new Error('Failed to fetch books.');
@@ -83,7 +88,7 @@ const BookList = () => {
         setBooks(responseData.books);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [authCtx.token]);
 
   const deleteBookHandler = (deletedBookID) => {
     fetch('http://localhost:8080/book/' + deletedBookID, {

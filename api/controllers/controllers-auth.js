@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator');
+const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 
@@ -27,5 +28,46 @@ exports.signUp = async (req, res, next) => {
     res.status(201).json({ message: 'User created.' });
   } catch (error) {
     console.error(error);
+  }
+};
+
+exports.login = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  try {
+    const existingUser = await User.findOne({ email: email });
+
+    if (!existingUser) {
+      const error = new Error('A user with this email could not be found.');
+      error.statusCode = 401;
+      throw error;
+    }
+
+    const matchingPassword = await bcrypt.compare(
+      password,
+      existingUser.password
+    );
+
+    if (!matchingPassword) {
+      const error = new Error('Wrong password.');
+      error.statusCode = 401;
+      throw error;
+    }
+
+    const token = await jwt.sign(
+      {
+        email: existingUser.email,
+        userId: existingUser._id.toString(),
+      },
+      'theStringToMakeASecret',
+      { expiresIn: '1h' }
+    );
+
+    res.status(200).json({ token: token, userId: existingUser._id.toString() });
+  } catch (error) {
+    if (!error.statusCode) {
+      error.statusCode = 500;
+    }
+    next(error);
   }
 };
