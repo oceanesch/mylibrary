@@ -35,9 +35,9 @@ exports.login = async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
-    const existingUser = await User.findOne({ email: email });
+    const user = await User.findOne({ email: email });
 
-    if (!existingUser) {
+    if (!user) {
       const error = new Error('A user with this email could not be found.');
       error.statusCode = 401;
       throw error;
@@ -45,7 +45,7 @@ exports.login = async (req, res, next) => {
 
     const matchingPassword = await bcrypt.compare(
       password,
-      existingUser.password
+      user.password
     );
 
     if (!matchingPassword) {
@@ -54,16 +54,16 @@ exports.login = async (req, res, next) => {
       throw error;
     }
 
-    const token = await jwt.sign(
+    const token = jwt.sign(
       {
-        email: existingUser.email,
-        userId: existingUser._id.toString(),
+        email: user.email,
+        userId: user._id.toString(),
       },
       'theStringToMakeASecret',
       { expiresIn: '1h' }
     );
 
-    res.status(200).json({ token: token, userId: existingUser._id.toString() });
+    res.status(200).json({ token: token, userId: user._id.toString() });
   } catch (error) {
     if (!error.statusCode) {
       error.statusCode = 500;

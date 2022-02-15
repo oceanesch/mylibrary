@@ -23,26 +23,35 @@ const LogInForm = () => {
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
 
-    const response = await fetch('http://localhost:8080/login', {
-      method: 'POST',
-      body: JSON.stringify({
-        email: enteredEmail,
-        password: enteredPassword,
-      }),
-      headers: { 'Content-Type': 'application/json' },
-    });
+    try {
+      const response = await fetch('http://localhost:8080/login', {
+        method: 'POST',
+        body: JSON.stringify({
+          email: enteredEmail,
+          password: enteredPassword,
+        }),
+        headers: { 'Content-Type': 'application/json' },
+      });
 
-    if (response.status !== 200 && response.status !== 201) {
-      throw new Error('Authentication failed.');
+      if (response.status !== 200 && response.status !== 201) {
+        throw new Error('Authentication failed.');
+      } else {
+        const responseData = await response.json();
+
+        console.log(responseData);
+
+        localStorage.setItem('token', responseData.token);
+        localStorage.setItem('userId', responseData.userId);
+
+        //TODO: Add the auto logout after 1h
+
+        authCtx.logIn(localStorage.getItem('token'));
+
+        navigationHistory('/myshelf');
+      }
+    } catch (error) {
+      console.error(error);
     }
-
-    const responseData = await response.json();
-
-    console.log(responseData);
-
-    authCtx.logIn(responseData.token);
-
-    navigationHistory('/myshelf');
   };
 
   return (
