@@ -38,12 +38,10 @@ const SignUpForm = () => {
     if (response.status !== 200 && response.status !== 201) {
       setError(true);
       const responseData = await response.json();
-      console.log(responseData);
       setErrorMessage(responseData.data[0].msg);
-      throw new Error(errorMessage);
+    } else {
+      navigationHistory('/login');
     }
-
-    navigationHistory('/login');
   };
 
   return (
