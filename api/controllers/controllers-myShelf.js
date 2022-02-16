@@ -2,7 +2,9 @@ const Book = require('../models/book');
 const User = require('../models/user');
 
 exports.getBooks = (req, res, next) => {
-  Book.find()
+  const userId = req.userId;
+
+  Book.find({ userId: userId })
     .then((books) => {
       res.status(200).json({
         message: 'Fetched books successfully.',
