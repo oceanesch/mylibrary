@@ -88,7 +88,7 @@ const BookList = () => {
         setBooks(responseData.books);
       })
       .catch((error) => console.log(error));
-  }, [authCtx.token]);
+  }, [authCtx]);
 
   const deleteBookHandler = (deletedBookID) => {
     fetch('http://localhost:8080/book/' + deletedBookID, {

@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 const myShelfController = require('../controllers/controllers-myShelf');
+const isAuth = require('../middleware/is-auth');
 
-router.get('/book', myShelfController.getBooks);
+router.get('/book', isAuth, myShelfController.getBooks);
 
-router.post('/book', myShelfController.addNewBook);
+router.post('/book', isAuth, myShelfController.addNewBook);
 
-router.delete('/book/:bookId', myShelfController.deleteBook);
-
+router.delete('/book/:bookId', isAuth, myShelfController.deleteBook);
 
 module.exports = router;
