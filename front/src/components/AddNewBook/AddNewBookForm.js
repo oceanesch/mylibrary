@@ -1,9 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './AddNewBookForm.module.css';
 import { StyledEngineProvider } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+
+import AuthContext from '../../store/auth-context';
 
 const AddNewBookForm = () => {
   const titleInputRef = useRef();
@@ -11,6 +13,7 @@ const AddNewBookForm = () => {
   const coverInputRef = useRef();
 
   const navigationHistory = useNavigate();
+  const authCtx = useContext(AuthContext);
 
   const addNewBookSubmitHandler = (event) => {
     event.preventDefault();
@@ -23,7 +26,10 @@ const AddNewBookForm = () => {
 
     fetch('http://localhost:8080/book', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + authCtx.token,
+      },
       body: JSON.stringify({ title: title, author: author, image: image }),
     })
       .then((response) => {

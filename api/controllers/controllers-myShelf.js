@@ -1,4 +1,5 @@
 const Book = require('../models/book');
+const User = require('../models/user');
 
 exports.getBooks = (req, res, next) => {
   Book.find()
@@ -20,12 +21,19 @@ exports.addNewBook = (req, res, next) => {
     title,
     author,
     image,
+    userId: req.userId,
   });
 
   newBook
     .save()
     .then((result) => {
-      console.log(result);
+      return User.findById(req.userId);
+    })
+    .then((user) => {
+      user.books.push(newBook);
+      return user.save();
+    })
+    .then(() => {
       res.status(200).json({ message: 'New book added' });
     })
     .catch((error) => console.log(error));

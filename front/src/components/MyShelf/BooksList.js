@@ -76,7 +76,7 @@ const BookList = () => {
 
   useEffect(() => {
     fetch('http://localhost:8080/book', {
-      headers: { Authorization: 'Bearer ' + authCtx.token },
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
     })
       .then((response) => {
         if (response.status !== 200) {
