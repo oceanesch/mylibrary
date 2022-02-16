@@ -88,11 +88,12 @@ const BookList = () => {
         setBooks(responseData.books);
       })
       .catch((error) => console.log(error));
-  }, [authCtx]);
+  }, []);
 
   const deleteBookHandler = (deletedBookID) => {
     fetch('http://localhost:8080/book/' + deletedBookID, {
       method: 'DELETE',
+      headers: { Authorization: 'Bearer ' + authCtx.token },
     })
       .then((response) => {
         if (response.status !== 200) {

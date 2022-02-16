@@ -66,6 +66,13 @@ exports.deleteBook = async (req, res, next) => {
       return Book.findByIdAndRemove(bookId);
     })
     .then(() => {
+      return User.findById(req.userId);
+    })
+    .then((user) => {
+      user.books.pull(bookId);
+      return user.save();
+    })
+    .then(() => {
       res.status(200).json({ message: 'Book deleted.' });
     })
     .catch((error) => {
