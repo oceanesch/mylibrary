@@ -76,7 +76,7 @@ const BookList = () => {
 
   useEffect(() => {
     fetch('http://localhost:8080/book', {
-      headers: { Authorization: 'Bearer ' + authCtx.token },
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('token') },
     })
       .then((response) => {
         if (response.status !== 200) {
@@ -88,11 +88,12 @@ const BookList = () => {
         setBooks(responseData.books);
       })
       .catch((error) => console.log(error));
-  }, [authCtx]);
+  }, []);
 
   const deleteBookHandler = (deletedBookID) => {
     fetch('http://localhost:8080/book/' + deletedBookID, {
       method: 'DELETE',
+      headers: { Authorization: 'Bearer ' + authCtx.token },
     })
       .then((response) => {
         if (response.status !== 200) {
@@ -101,7 +102,6 @@ const BookList = () => {
         return response.json();
       })
       .then((responseData) => {
-        console.log(responseData);
 
         const updatedBooks = books.filter((book) => book._id !== deletedBookID);
         setBooks(updatedBooks);

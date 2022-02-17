@@ -13,8 +13,6 @@ const MainNavigation = () => {
   const authCtx = useContext(AuthContext);
 
   const logoutHandler = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
     authCtx.logOut();
   };
 

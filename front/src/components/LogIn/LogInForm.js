@@ -17,6 +17,12 @@ const LogInForm = () => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
 
+  const setAutoLogout = (miliseconds) => {
+    setTimeout(() => {
+      authCtx.logOut();
+    }, miliseconds);
+  };
+
   const LogInSubmitHandler = async (event) => {
     event.preventDefault();
 
@@ -41,9 +47,15 @@ const LogInForm = () => {
         localStorage.setItem('token', responseData.token);
         localStorage.setItem('userId', responseData.userId);
 
-        //TODO: Add the auto logout after 1h
-
         authCtx.logIn(localStorage.getItem('token'));
+
+        const remainingMilliseconds = 60 * 60 * 1000;
+        const expiryDate = new Date(
+          new Date().getTime() + remainingMilliseconds
+        );
+
+        localStorage.setItem('expiryDate', expiryDate.toISOString());
+        setAutoLogout(remainingMilliseconds);
 
         navigationHistory('/myshelf');
       }

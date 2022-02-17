@@ -25,6 +25,9 @@ export const AuthContextProvider = (props) => {
   };
 
   const logOutHandler = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('expiryDate')
     setToken(null);
   };
 
