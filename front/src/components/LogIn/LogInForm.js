@@ -38,8 +38,6 @@ const LogInForm = () => {
       } else {
         const responseData = await response.json();
 
-        console.log(responseData);
-
         localStorage.setItem('token', responseData.token);
         localStorage.setItem('userId', responseData.userId);
 
