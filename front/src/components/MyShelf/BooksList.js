@@ -102,7 +102,6 @@ const BookList = () => {
         return response.json();
       })
       .then((responseData) => {
-        console.log(responseData);
 
         const updatedBooks = books.filter((book) => book._id !== deletedBookID);
         setBooks(updatedBooks);
