@@ -44,25 +44,19 @@ exports.addNewBook = (req, res, next) => {
 exports.deleteBook = async (req, res, next) => {
   const { bookId } = req.params;
 
-  // try {
-  //   const book = await Book.findById(bookId);
-
-  //   if (!book) throw new Error('No book found.');
-
-  //   await Book.findByIdAndRemove(bookId);
-
-  //   res.status(200).json({ message: 'Book deleted' });
-  // } catch (error) {
-  //   console.error(error);
-  // }
-
   Book.findById(bookId)
     .then((book) => {
       if (!book) {
-        throw new Error('No book found.');
+        const error = new Error('No book found.');
+        error.statusCode = 404;
+        throw error;
       }
-      //checked if the user is logged in
 
+      if (book.userId.toString() !== req.userId) {
+        const error = new Error('Not Authorized.');
+        error.statusCode = 403;
+        throw error;
+      }
       return Book.findByIdAndRemove(bookId);
     })
     .then(() => {
