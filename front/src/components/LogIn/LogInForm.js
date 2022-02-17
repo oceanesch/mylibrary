@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react';
+import { useRef, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styles from '../SignUp/SignUpForm.module.css';
@@ -11,78 +11,63 @@ import EmailInput from '../Shared/EmailInput';
 import AuthContext from '../../store/auth-context';
 
 const LogInForm = () => {
-    const navigationHistory = useNavigate();
-    const authCtx = useContext(AuthContext);
+  const navigationHistory = useNavigate();
+  const authCtx = useContext(AuthContext);
 
-    const emailInputRef = useRef();
-    const passwordInputRef = useRef();
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
 
-    const LogInSubmitHandler = (event) => {
-        event.preventDefault();
+  const LogInSubmitHandler = async (event) => {
+    event.preventDefault();
 
-        const enteredEmail = emailInputRef.current.value;
-        const enteredPassword = passwordInputRef.current.value;
+    const enteredEmail = emailInputRef.current.value;
+    const enteredPassword = passwordInputRef.current.value;
 
-        console.log(enteredEmail, enteredPassword);
+    try {
+      const response = await fetch('http://localhost:8080/login', {
+        method: 'POST',
+        body: JSON.stringify({
+          email: enteredEmail,
+          password: enteredPassword,
+        }),
+        headers: { 'Content-Type': 'application/json' },
+      });
 
-        fetch(
-            'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDe2VlLrzxhf8f_PW46fjEuMfYRy6yDvSY',
-            {
-                method: 'POST',
-                body: JSON.stringify({
-                    email: enteredEmail,
-                    password: enteredPassword,
-                    returnSecureToken: true,
-                }),
-                headers: { 'Content-Type': 'application/json' },
-            }
-        )
-            .then((response) => {
-                if (response.ok) {
-                    navigationHistory('/myshelf');
-                    return response.json();
-                } else {
-                    return response.json().then((responseData) => {
-                        let errorMessage = 'Authentication failed';
-                        if (
-                            responseData &&
-                            responseData.error &&
-                            responseData.error.message
-                        ) {
-                            errorMessage = responseData.error.message;
-                        }
-                        throw new Error(errorMessage);
-                    });
-                }
-            })
-            .then((responseData) => {
-                console.log(responseData);
-                authCtx.logIn(responseData.idToken);
-            })
-            .catch((err) => {
-                alert(err.message);
-            });
+      if (response.status !== 200 && response.status !== 201) {
+        throw new Error('Authentication failed.');
+      } else {
+        const responseData = await response.json();
 
-        emailInputRef.current.value = '';
-        passwordInputRef.current.value = '';
-    };
+        localStorage.setItem('token', responseData.token);
+        localStorage.setItem('userId', responseData.userId);
 
-    return (
-        <StyledEngineProvider injectFirst>
-            <form onSubmit={LogInSubmitHandler} className={styles.signUpForm}>
-                <EmailInput emailInputRef={emailInputRef} />
-                <PasswordInput passwordInputRef={passwordInputRef} />
-                <Button
-                    variant="outlined"
-                    margin="normal"
-                    type="submit"
-                    className={styles.button}
-                >
-                    Sign Up
-                </Button>
-            </form>
-        </StyledEngineProvider>
-    );
+        //TODO: Add the auto logout after 1h
+
+        authCtx.logIn(localStorage.getItem('token'));
+
+        navigationHistory('/myshelf');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <StyledEngineProvider injectFirst>
+      <form onSubmit={LogInSubmitHandler} className={styles.signUpForm}>
+        <EmailInput emailInputRef={emailInputRef} />
+        <PasswordInput passwordInputRef={passwordInputRef} />
+        <Button
+          variant="outlined"
+          margin="normal"
+          type="submit"
+          className={styles.button}
+        >
+          Login
+        </Button>
+      </form>
+    </StyledEngineProvider>
+  );
 };
 
 export default LogInForm;

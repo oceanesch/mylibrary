@@ -22,6 +22,14 @@ app.use((req, res, next) => {
 app.use(myShelfRoutes);
 app.use(authRoutes);
 
+app.use((error, req, res, next) => {
+  console.log(error);
+  const status = error.statusCode || 500;
+  const message = error.message;
+  const data = error.data;
+  res.status(status).json({ message: message, data: data });
+});
+
 mongoose
   .connect(
     'mongodb+srv://oceane:cottageinforest@mylibrarydb.2spjb.mongodb.net/myLibrary?retryWrites=true&w=majority'
