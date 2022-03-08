@@ -2,6 +2,9 @@
 
 MyLibrary is a small book tracker allowing users to keep up to date a list of the books they read. It is a project that uses React and the library Material UI for the front. This project was to familiarize myself a Rest API, authentication functionality. To help me build the backend, I used node.js and mongoose. 
 
+## Prerequisite 
+
+You need to have node.js installed. 
 
 ## Try MyLibrary
 
@@ -16,6 +19,6 @@ To try MyLibrary :
 
 This will open the front of the application on http://localhost:3000
 
-You can know either sign up and start adding some books to your shelf or login with an already existing user: 
+You can now either sign up and start adding some books to your shelf or login with an already existing user: 
 * User email: test@test.com 
 * Password: Secret!1
